@@ -1,0 +1,58 @@
+---
+title: Pemahaman dan Refleksi Constructor & Destructor dalam Class (OOP)
+date: '2020-09-01T00:00:00.000Z'
+author: content/authors/me.md
+categories:
+  - pemrograman
+tags:
+  - apa-itu-constructor-dan-destructor
+  - constructor-destructor-php
+  - pengertian-constructor-dan-destructor
+excerpt: |
+  Penjelasan dan contoh mengenai Constructor & Destructor di OOP.
+---
+
+### Pengertian Constructor
+
+Constructor merupakan sebuah metode khusus/spesial yang dapat kita buat didalam class. Constructor ini akan otomatis dijalankan ketika kita meng-instansiasi (membuat) object dari class yang memiliki metode constructor.
+
+##### Contoh penulisan Constructor:
+
+Penulisan Constructor diawali dengan dua simbol underscore `__` lalu ditambahkan dengan kata `constructor(){}` sehingga hasilnya menjadi: `__constructor(){}.`
+
+##### Contoh penulisan Constructor dalam PHP:
+
+```php
+  //membuat Constructor untuk Hewan
+    public function \_\_construct($namaHewan = "",$jenisKelamin = "",$jumlahKaki = 0,$jenisPemakan = ""){
+            $this->namaHewan = $namaHewan;
+            $this->jenisKelamin = $jenisKelamin;
+            $this->jumlahKaki = $jumlahKaki;
+            $this->jenisPemakan = $jenisPemakan;
+        }
+```
+
+### Pengertian Destructor
+
+Destructor merupakan kebalikan dari Constructor, bedanya adalah Destructor otomatis dijalankan ketika sebuah object dihapus.
+
+##### Contoh penulisan Destructor:
+
+Penulisan Destructor diawali dengan dua simbol underscore `__` lalu ditambahkan dengan kata `destruct(){}` sehingga hasilnya menjadi: `__destruct(){}`.
+
+##### Contoh penulisan Destructor dalam PHP:
+
+```php
+  //membuat Destructor untuk Hewan
+    public function __destruct(){
+            //otomatis akan melakukan ini ketika object tersebut
+              dihapus
+            echo "Object $this->namaHewan telah dihapus";
+        }
+```
+
+Gist (snippet): [https://gist.github.com/suryomujahid/a3479f8dad7a1580e53770fa760c5da2](https://gist.github.com/suryomujahid/a3479f8dad7a1580e53770fa760c5da2)
+
+Jika terdapat salah kata silahkan berkomentar dibawah, saya dengan senang hati akan memperbaikinya.
+
+Terimakasih telah menyempatkan waktunya untuk membaca disini!

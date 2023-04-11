@@ -26,6 +26,20 @@ const getUserSystemDarkMode = () => {
   return "light";
 };
 
+export const toggleDarkMode = () => {
+  if (typeof window !== "undefined") {
+    const root = window.document.documentElement;
+    const isDarkMode = root.classList.contains("dark");
+
+    updateRenderColorMode(isDarkMode ? "light" : "dark");
+
+    localStorage.setItem("theme", isDarkMode ? "light" : "dark");
+
+    return;
+  }
+  return;
+};
+
 export const Theme = ({ data, children }) => {
   const [systemDarkMode, setSystemDarkMode] = React.useState(
     getUserSystemDarkMode()
@@ -51,7 +65,10 @@ export const Theme = ({ data, children }) => {
 
   React.useEffect(() => {
     updateRenderColorMode(
-      darkMode === "system"
+      localStorage.getItem("theme") === "dark" ||
+        localStorage.getItem("theme") === "light"
+        ? localStorage.getItem("theme")
+        : darkMode === "system"
         ? systemDarkMode
         : darkMode !== ""
         ? darkMode

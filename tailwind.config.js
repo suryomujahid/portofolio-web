@@ -3,13 +3,14 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   mode: "jit",
-  purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
   theme: {
     colors: {
       transparent: "transparent",
       current: "currentColor",
       black: colors.black,
+      dark: "#0E1217",
       white: colors.white,
       teal: colors.cyan,
       green: colors.emerald,
@@ -101,6 +102,7 @@ module.exports = {
       fontFamily: {
         nunito: ["Nunito", ...defaultTheme.fontFamily.sans],
         lato: ["Lato", ...defaultTheme.fontFamily.sans],
+        ibm: ["IBM Plex Mono", ...defaultTheme.fontFamily.mono],
       },
       typography: (theme) => ({
         DEFAULT: {

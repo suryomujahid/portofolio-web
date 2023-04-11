@@ -1,16 +1,21 @@
 {
   "header": {
-    "name": "Tina Starter",
     "icon": {
-      "color": "orange",
-      "style": "float",
-      "name": "Tina"
+      "name": "BiSun",
+      "color": "yellow",
+      "style": "float"
     },
+    "name": "Suryo Mujahid",
+    "description": "I'm a software engineer who loves to build things.",
     "color": "default",
     "nav": [
       {
         "href": "",
         "label": "Home"
+      },
+      {
+        "href": "projects",
+        "label": "Projects"
       },
       {
         "href": "about",
@@ -25,14 +30,15 @@
   "footer": {
     "color": "default",
     "social": {
-      "facebook": "/",
-      "twitter": "/",
-      "instagram": "/"
+      "email": "suryomujahid@gmail.com",
+      "discord": "https://discordapp.com/users/467693206226862080",
+      "linkedin": "https://www.linkedin.com/in/suryo-mujahid/",
+      "github": "https://github.com/suryomujahid"
     }
   },
   "theme": {
     "color": "blue",
-    "font": "sans",
+    "font": "ibm",
     "darkMode": "system"
   }
 }

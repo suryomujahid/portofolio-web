@@ -1,4 +1,5 @@
 import { defineConfig } from "tinacms";
+import { aboutBlockSchema } from "../components/blocks/about";
 import { contentBlockSchema } from "../components/blocks/content";
 import { featureBlockSchema } from "../components/blocks/features";
 import { heroBlockSchema } from "../components/blocks/hero";
@@ -31,6 +32,72 @@ const config = defineConfig({
   },
   schema: {
     collections: [
+      {
+        label: "Projects",
+        name: "project",
+        path: "content/projects",
+        format: "mdx",
+        ui: {
+          router: ({ document }) => {
+            return `/projects/${document._sys.filename}`;
+          },
+        },
+        fields: [
+          {
+            type: "string",
+            label: "Title",
+            name: "title",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "image",
+            name: "heroImg",
+            label: "Hero Image",
+          },
+          {
+            type: "rich-text",
+            label: "Excerpt",
+            name: "excerpt",
+          },
+          {
+            type: "datetime",
+            label: "Start Date",
+            name: "startDate",
+            ui: {
+              dateFormat: "MMMM YYYY",
+              timeFormat: "hh:mm A",
+            },
+          },
+          {
+            type: "datetime",
+            label: "End Date",
+            name: "endDate",
+            ui: {
+              dateFormat: "MMMM YYYY",
+              timeFormat: "hh:mm A",
+            },
+          },
+          {
+            type: "string",
+            label: "Details",
+            name: "details",
+            list: true,
+            ui: {
+              component: "details",
+            },
+          },
+          {
+            type: "string",
+            label: "Tech Stacks",
+            name: "techStacks",
+            list: true,
+            ui: {
+              component: "techStacks",
+            },
+          }
+        ],
+      },
       {
         label: "Blog Posts",
         name: "post",
@@ -143,6 +210,15 @@ const config = defineConfig({
             ],
             isBody: true,
           },
+          {
+            type: "string",
+            label: "Tags",
+            name: "tags",
+            list: true,
+            ui: {
+              component: "tags",
+            },
+          },
         ],
       },
       {
@@ -224,18 +300,18 @@ const config = defineConfig({
                 fields: [
                   {
                     type: "string",
-                    label: "Facebook",
-                    name: "facebook",
+                    label: "Email",
+                    name: "email",
                   },
                   {
                     type: "string",
-                    label: "Twitter",
-                    name: "twitter",
+                    label: "Discord",
+                    name: "discord",
                   },
                   {
                     type: "string",
-                    label: "Instagram",
-                    name: "instagram",
+                    label: "Linkedin",
+                    name: "linkedin",
                   },
                   {
                     type: "string",
@@ -276,6 +352,10 @@ const config = defineConfig({
                   {
                     label: "Lato",
                     value: "lato",
+                  },
+                  {
+                    label: "IBM Plex Mono",
+                    value: "ibm",
                   },
                 ],
               },
@@ -356,6 +436,7 @@ const config = defineConfig({
               visualSelector: true,
             },
             templates: [
+              aboutBlockSchema,
               heroBlockSchema,
               // @ts-ignore
               featureBlockSchema,

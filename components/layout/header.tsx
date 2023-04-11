@@ -2,16 +2,24 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Container } from "../util/container";
-import { useTheme } from ".";
+import { useTheme, toggleDarkMode } from ".";
 import { Icon } from "../util/icon";
+import { BiMoon, BiSun } from "react-icons/bi";
+import { DefaultSeo } from "next-seo";
 
 export const Header = ({ data }) => {
   const router = useRouter();
   const theme = useTheme();
+  const [isDarkMode, setIsDarkMode] = React.useState(false);
+
+  const toggleTheme = () => {
+    toggleDarkMode();
+    setIsDarkMode(!isDarkMode);
+  };
 
   const headerColor = {
     default:
-      "text-black dark:text-white from-gray-50 to-white dark:from-gray-800 dark:to-gray-900",
+      "text-black dark:text-white from-gray-50 to-white dark:from-dark dark:to-dark",
     primary: {
       blue: "text-white from-blue-300 to-blue-500",
       teal: "text-white from-teal-400 to-teal-500",
@@ -59,103 +67,137 @@ export const Header = ({ data }) => {
   const [prefix, setPrefix] = React.useState("");
 
   React.useEffect(() => {
+    console.log(data);
+    setIsDarkMode(
+      localStorage.getItem("theme") === "dark" || theme.darkMode === "dark"
+        ? true
+        : false
+    );
+
+
     if (window && window.location.pathname.startsWith("/admin")) {
       setPrefix("/admin");
     }
   }, []);
 
   return (
-    <div
-      className={`relative overflow-hidden bg-gradient-to-b ${headerColorCss}`}
-    >
-      <Container size="custom" className="py-0 relative z-10 max-w-8xl">
-        <div className="flex items-center justify-between gap-6">
-          <h4 className="select-none text-lg font-bold tracking-tight my-4 transition duration-150 ease-out transform">
-            <Link href="/" passHref>
-              <a className="flex gap-1 items-center whitespace-nowrap tracking-[.002em]">
-                <Icon
-                  parentColor={data.color}
-                  data={{
-                    name: data.icon.name,
-                    color: data.icon.color,
-                    style: data.icon.style,
-                  }}
-                />
-                {data.name}
-              </a>
-            </Link>
-          </h4>
-          <ul className="flex gap-6 sm:gap-8 lg:gap-10 tracking-[.002em] -mx-4">
-            {data.nav &&
-              data.nav.map((item, i) => {
-                const activeItem =
-                  item.href === ""
-                    ? router.asPath === "/"
-                    : router.asPath.includes(item.href);
-                return (
-                  <li
-                    key={`${item.label}-${i}`}
-                    className={`${
-                      activeItem ? activeItemClasses[theme.color] : ""
-                    }`}
-                  >
-                    <Link href={`${prefix}/${item.href}`} passHref>
-                      <a
-                        className={`relative select-none	text-base inline-block tracking-wide transition duration-150 ease-out hover:opacity-100 py-8 px-4 ${
-                          activeItem ? `` : `opacity-70`
-                        }`}
-                      >
-                        {item.label}
-                        {activeItem && (
-                          <svg
-                            className={`absolute bottom-0 left-1/2 w-[180%] h-full -translate-x-1/2 -z-1 opacity-10 dark:opacity-15 ${
-                              activeBackgroundClasses[theme.color]
-                            }`}
-                            preserveAspectRatio="none"
-                            viewBox="0 0 230 230"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <rect
-                              x="230"
-                              y="230"
-                              width="230"
-                              height="230"
-                              transform="rotate(-180 230 230)"
-                              fill="url(#paint0_radial_1_33)"
-                            />
-                            <defs>
-                              <radialGradient
-                                id="paint0_radial_1_33"
-                                cx="0"
-                                cy="0"
-                                r="1"
-                                gradientUnits="userSpaceOnUse"
-                                gradientTransform="translate(345 230) rotate(90) scale(230 115)"
-                              >
-                                <stop stopColor="currentColor" />
-                                <stop
-                                  offset="1"
-                                  stopColor="currentColor"
-                                  stopOpacity="0"
-                                />
-                              </radialGradient>
-                            </defs>
-                          </svg>
-                        )}
-                      </a>
-                    </Link>
-                  </li>
-                );
-              })}
-          </ul>
-        </div>
-        <div
-          className={`absolute h-1 bg-gradient-to-r from-transparent ${
-            data.color === "primary" ? `via-white` : `via-black dark:via-white`
-          } to-transparent bottom-0 left-4 right-4 -z-1 opacity-5`}
-        />
-      </Container>
-    </div>
+    <>
+      <DefaultSeo
+        title={data.name}
+        description={data.description}
+        openGraph={{
+          type: "website",
+          locale: "en_IE",
+          url: "https://www.suryomujahid.dev/",
+          site_name: "Suryo Mujahid",
+        }}
+        twitter={{
+          handle: "@suryomujahid",
+          site: "@suryomujahid",
+          cardType: "summary_large_image",
+        }}
+        robotsProps={{
+          maxSnippet: -1,
+          maxImagePreview: "large",
+          maxVideoPreview: -1,
+        }}
+      />
+      <div
+        className={`relative overflow-hidden bg-gradient-to-b ${headerColorCss}`}
+      >
+        <Container size="custom" width="small" className="py-0 relative z-10">
+          <div className="flex items-center justify-between sm:gap-3 flex-col sm:flex-row">
+            <h4 className="select-none text-lg font-bold tracking-tight my-1 sm:my-4 transition duration-150 ease-out transform">
+              <Link href="/" passHref>
+                <a className="flex gap-1 items-center whitespace-nowrap tracking-[.002em]">
+                  {data.name}
+                </a>
+              </Link>
+            </h4>
+            <ul className="flex gap-2 sm:gap-4 lg:gap-5 -mx-2">
+              {data.nav &&
+                data.nav.map((item, i) => {
+                  const activeItem =
+                    item.href === ""
+                      ? router.asPath === "/"
+                      : router.asPath.includes(item.href);
+                  return (
+                    <li
+                      key={`${item.label}-${i}`}
+                      className={`${
+                        activeItem ? activeItemClasses[theme.color] : ""
+                      }`}
+                    >
+                      <Link href={`${prefix}/${item.href}`} passHref>
+                        <a
+                          className={`relative select-none	text-base inline-block tracking-wide transition duration-150 ease-out hover:opacity-100 py-4 px-2 ${
+                            activeItem ? `` : `opacity-70`
+                          }`}
+                        >
+                          {item.label}
+                          {activeItem && (
+                            <svg
+                              className={`absolute bottom-0 left-1/2 w-[180%] h-full -translate-x-1/2 -z-1 opacity-10 dark:opacity-15 ${
+                                activeBackgroundClasses[theme.color]
+                              }`}
+                              preserveAspectRatio="none"
+                              viewBox="0 0 230 230"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <rect
+                                x="230"
+                                y="230"
+                                width="230"
+                                height="230"
+                                transform="rotate(-180 230 230)"
+                                fill="url(#paint0_radial_1_33)"
+                              />
+                              <defs>
+                                <radialGradient
+                                  id="paint0_radial_1_33"
+                                  cx="0"
+                                  cy="0"
+                                  r="1"
+                                  gradientUnits="userSpaceOnUse"
+                                  gradientTransform="translate(345 230) rotate(90) scale(230 115)"
+                                >
+                                  <stop stopColor="currentColor" />
+                                  <stop
+                                    offset="1"
+                                    stopColor="currentColor"
+                                    stopOpacity="0"
+                                  />
+                                </radialGradient>
+                              </defs>
+                            </svg>
+                          )}
+                        </a>
+                      </Link>
+                    </li>
+                  );
+                })}
+              <li>
+                <button
+                  className="relative select-none	text-base inline-block tracking-wide transition duration-150 ease-out hover:opacity-100 py-4 px-2 mt-1 opacity-70"
+                  onClick={toggleTheme}
+                >
+                  {isDarkMode ? (
+                    <BiSun className="w-5 h-5" />
+                  ) : (
+                    <BiMoon className="w-5 h-5" />
+                  )}
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div
+            className={`absolute h-1 bg-gradient-to-r from-transparent ${
+              data.color === "primary" ? `via-white` : `via-black dark:via-white`
+            } to-transparent bottom-0 left-4 right-4 -z-1 opacity-5`}
+          />
+        </Container>
+      </div>
+    </>
   );
 };

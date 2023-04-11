@@ -19,6 +19,9 @@ import format from "date-fns/format";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { Prism } from "tinacms/dist/rich-text/prism";
 import type { TinaMarkdownContent, Components } from "tinacms/dist/rich-text";
+import { BsClockFill } from "react-icons/bs";
+import { FaChevronLeft } from "react-icons/fa";
+import Link from "next/link";
 
 const components: Components<{
   BlockQuote: {
@@ -135,9 +138,17 @@ export const Post = (props) => {
   return (
     <Section className="flex-1">
       <Container width="small" className={`flex-1 pb-2`} size="large">
+        <div className="flex items-center justify-start">
+          <Link href="/posts" as="/posts" passHref>
+            <a className="text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400">
+              <FaChevronLeft className="inline-block -mt-1 w-auto opacity-70 mr-2" />
+              Blog
+            </a>
+          </Link>
+        </div>
         <h2
           data-tinafield="title"
-          className={`w-full relative	mb-8 text-6xl font-extrabold tracking-normal text-center title-font`}
+          className={`w-full relative	mb-2 text-4xl font-extrabold tracking-normal text-left title-font`}
         >
           <span
             className={`bg-clip-text text-transparent bg-gradient-to-r ${
@@ -149,31 +160,19 @@ export const Post = (props) => {
         </h2>
         <div
           data-tinafield="author"
-          className="flex items-center justify-center mb-16"
+          className="flex items-center justify-left mb-12"
         >
-          {props.author && (
-            <>
-              <div className="flex-shrink-0 mr-4">
-                <img
-                  className="h-14 w-14 object-cover rounded-full shadow-sm"
-                  src={props.author.avatar}
-                  alt={props.author.name}
-                />
-              </div>
-              <p className="text-base font-medium text-gray-600 group-hover:text-gray-800 dark:text-gray-200 dark:group-hover:text-white">
-                {props.author.name}
-              </p>
-              <span className="font-bold text-gray-200 dark:text-gray-500 mx-2">
-                —
-              </span>
-            </>
-          )}
-          <p
-            data-tinafield="date"
-            className="text-base text-gray-400 group-hover:text-gray-500 dark:text-gray-300 dark:group-hover:text-gray-150"
-          >
-            {formattedDate}
-          </p>
+          <>
+            <span className="font-bold text-sm text-gray-200 dark:text-gray-500 mr-2">
+              <BsClockFill className="inline-block -mt-1 w-auto opacity-70" />
+            </span>
+            <p
+              data-tinafield="date"
+              className="text-base text-gray-400 group-hover:text-gray-500 dark:text-gray-300 dark:group-hover:text-gray-150"
+            >
+              {formattedDate}
+            </p>
+          </>
         </div>
       </Container>
       {props.heroImg && (

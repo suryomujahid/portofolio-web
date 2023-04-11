@@ -1,0 +1,105 @@
+---
+title: 'Mengenal Class, Object, Attribute, dan Method dalam OOP'
+date: '2020-08-20T00:00:00.000Z'
+author: content/authors/me.md
+categories:
+  - pemrograman
+tags:
+  - apa-itu-class-dalam-oop
+  - class-object-attribute-method-dalam-oop
+  - class-oop-dalam-php
+  - struktur-dasar-oop
+excerpt: |
+  Pengenalan class, object, attribute, dan method dalam OOP.
+---
+
+Halo, pada artikel kali ini saya akan membahas tentang **Apa itu Class, Object, Attribute, dan Method dalam Object-Oriented Programming (OOP)**, untuk itu silahkan simak perlahan penjelasan singkat yang akan saya bahas di artikel ini.
+
+### Pengertian Class
+
+Class adalah konsep dalam OOP yang digunakan untuk membuat struktur dasar untuk membuat objek. Di dalam class terdapat atribut atau properti yang merepresentasikan karakteristik dari objek, serta metode atau fungsi yang merepresentasikan tindakan atau perilaku yang dapat dilakukan oleh objek. Class memungkinkan programmer untuk membuat blueprint yang dapat digunakan berulang kali untuk membuat objek serupa.
+
+Contoh penulisan Class dalam PHP:
+
+```php
+<?php
+
+//Hewan merupakan nama Class-nya
+class Hewan{
+    //Isi class Hewan
+}
+
+>
+```
+
+### Pengertian Attribute
+
+Attribute atau properti adalah data atau informasi yang tersimpan dalam sebuah class. Misalnya, pada objek Hewan, terdapat beberapa karakteristik seperti jumlah kaki, warna kulit, jenis makanan, dan sebagainya. Atribut ini dapat dianggap sebagai variabel yang merepresentasikan nilai dari karakteristik tersebut di dalam sebuah class.
+
+Dengan adanya atribut, programmer dapat mengelompokkan dan mengatur data dengan lebih terstruktur dan efisien di dalam class, serta memudahkan pengaksesan dan penggunaan data tersebut di dalam program.
+
+Contoh penulisan Attribute dalam PHP:
+
+```php
+<?php
+
+class Hewan{
+    var $jenisPemakan;
+    var $jumlahKaki;
+}
+
+>
+```
+
+### Pengertian Method
+
+Method atau metode adalah tindakan atau perilaku yang dapat dilakukan oleh sebuah objek di dalam sebuah class. Method merepresentasikan cara kerja atau bagaimana objek tersebut dapat beroperasi atau berjalan. Sebagai contoh, pada objek Hewan, terdapat beberapa method seperti jalan, makan, tidur, dan sebagainya.
+
+Dalam OOP, method dapat digunakan untuk mengatur perilaku dan interaksi antar objek, serta memproses data yang tersimpan di dalam class. Dengan menggunakan method, programmer dapat mengatur tindakan yang dapat dilakukan oleh objek secara terstruktur dan efisien di dalam program.
+
+Contoh penulisan Method dalam PHP:
+
+```php
+<?php
+
+class Hewan{
+    var $jenisPemakan;
+    var $jumlahKaki;
+
+    //membuat metode makan
+    function makan(){
+         return "Nom nom nom";
+    }
+}
+
+>
+```
+
+### Pengertian Object
+
+Object atau objek adalah hasil dari deklarasi atau instance sebuah class. Dalam objek, kita dapat mengakses dan memanipulasi isi dari class yang telah dibuat. Sebagai contoh, jika kita memiliki class Hewan, maka kita dapat membuat objek Hewan baru yang merepresentasikan hewan spesifik dengan atribut dan method yang berbeda-beda.
+
+Dalam objek Hewan ini, kita dapat memanipulasi atribut seperti jumlah kaki, warna kulit, jenis makanan, dan sebagainya, serta melakukan tindakan seperti berjalan, makan, tidur, atau bersuara. Dengan menggunakan objek, programmer dapat mengorganisir dan mengelola data dengan lebih terstruktur dan efisien di dalam program.
+
+Contoh penulisan Object pada PHP:
+
+```php
+<?php
+
+class Hewan{
+    var $jenisPemakan;
+    var $jumlahKaki;
+
+    function makan(){
+         return "Nom nom nom";
+    }
+}
+
+//membuat object dari class Hewan
+$rusa = new Hewan();
+$gajah = new Hewan();
+
+>
+```
+
+Gist (snippet): [https://gist.github.com/suryomujahid/a3479f8dad7a1580e53770fa760c5da2](https://gist.github.com/suryomujahid/a3479f8dad7a1580e53770fa760c5da2)

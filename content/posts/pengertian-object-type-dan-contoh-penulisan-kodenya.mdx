@@ -1,0 +1,71 @@
+---
+title: Pengertian Object Type dan Contoh Penulisan Kodenya
+date: '2020-09-02T00:00:00.000Z'
+author: content/authors/me.md
+categories:
+  - pemrograman
+tags:
+  - apa-itu-object-type
+  - contoh-penulisan-object-type
+  - pengertian-object-type
+excerpt: |
+  Memanggil attribute dari Object (PHP).
+---
+
+### Pengertian Object Type
+
+`Object Type` merupakan tipe data yang mengandung informasi (attribute) dan metode (method) yang terdapat dalam `Class` dari `object` tersebut.
+
+##### Contoh penulisan kode penggunaan `Object Type` dalam PHP:
+
+```php
+<?php
+
+class Hewan{
+
+    public $namaHewan,
+            $jenisKelamin,
+            $jumlahKaki,
+            $jenisPemakan;
+
+    public function __construct($namaHewan = "",$jenisKelamin = "",$jumlahKaki = 0,$jenisPemakan = ""){
+            $this->namaHewan = $namaHewan;
+            $this->jenisKelamin = $jenisKelamin;
+            $this->jumlahKaki = $jumlahKaki;
+            $this->jenisPemakan = $jenisPemakan;
+        }
+
+    public function __destruct(){
+        echo "<br> Object $this->namaHewan telah dihapus";
+        }
+
+    public function getData(){
+         return "$this->jenisKelamin, $this->jumlahKaki, $this->jenisPemakan";
+    }
+}
+
+//membuat class untuk mencoba Object Type
+class getInfoHewan{
+      //parameter hanya dapat diisi object yang berasal dari class Hewan
+    public function getInfo(Hewan $object){
+      return "{$object->namaHewan}, {$object->getData()}";
+      }
+}
+
+$rusa = new Hewan("Rusa", "Jantan", 4, "Herbivora");
+
+$pencetakInfo = new getInfoHewan();
+
+//mencetak data sekaligus mengolah data object rusa
+echo $pencetakInfo->getInfo($rusa);
+
+unset($rusa);
+
+?>
+```
+
+Gist (snippet): [https://gist.github.com/suryomujahid/a3479f8dad7a1580e53770fa760c5da2](https://gist.github.com/suryomujahid/a3479f8dad7a1580e53770fa760c5da2)
+
+Jika terdapat salah kata silahkan berkomentar dibawah, saya dengan senang hati akan memperbaikinya.
+
+Terimakasih telah menyempatkan waktunya untuk membaca disini!

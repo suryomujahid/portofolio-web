@@ -6,7 +6,7 @@ import type { TinaTemplate } from "tinacms";
 export const Testimonial = ({ data, parentField = "" }) => {
   return (
     <Section color={data.color}>
-      <Container size="large">
+      <Container width="small">
         <blockquote>
           <div
             className={`relative z-10 max-w-3xl mx-auto text-4xl lg:text-5xl font-bold tracking-normal text-center title-font ${
